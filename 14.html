@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>Count the number of milliseconds between the two click events on a paragraph </p>
+    <div>Click on the above paragraph</div>
+</body>
+<script>
+    // Initialize variables to store the last timestamp and time difference
+    var lastTimestamp, timeDifference;
+
+    // Get all p elements
+    var paragraphs = document.querySelectorAll("p");
+
+    // Get the div element where you want to display the results
+    var divElement = document.querySelector("div");
+
+    // Attach click event listener to each p element
+    paragraphs.forEach(function (paragraph) {
+        paragraph.addEventListener('click', function (event) {
+            // Check if lastTimestamp has a value
+            if (lastTimestamp) {
+                // Calculate the time difference between the current and last click
+                timeDifference = event.timeStamp - lastTimestamp;
+
+                // Append the time difference to the div element
+                divElement.innerHTML += "Time since last event: " + timeDifference + "<br>";
+            } else {
+                // Display a message if it's the first click
+                divElement.innerHTML += "<br>Click again.<br>";
+            }
+
+            // Update the lastTimestamp with the current timestamp
+            lastTimestamp = event.timeStamp;
+        });
+    });
+
+</script>
+
+</html>

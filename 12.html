@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button>Display event.result</button>
+    <p></p>
+</body>
+<script>
+    // Get all button elements
+    var buttons = document.querySelectorAll("button");
+
+    // Attach click event listener to each button
+    buttons.forEach(function (button) {
+        button.addEventListener('click', function (event) {
+            // Prevent the default behavior and stop event propagation if needed
+            event.preventDefault();
+            event.stopPropagation();
+
+            // Update the content of all p elements with the text "Hello"
+            var paragraphs = document.querySelectorAll("p");
+            paragraphs.forEach(function (paragraph) {
+                paragraph.innerHTML = "Hello";
+            });
+        });
+    });
+
+</script>
+
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        span {
+            display: none;
+        }
+    </style>
+    <title>Document</title>
+</head>
+
+<body>
+    <p><input type="text"> <span>Input your first name</span></p>
+    <p><input type="text"> <span>Input your last name</span></p>
+
+    <script>
+        // Get all input elements
+        var inputs = document.querySelectorAll("input");
+
+        // Attach focus event listener to each input element
+        inputs.forEach(function (input) {
+            input.addEventListener('focus', function () {
+                // Get the next sibling element of type 'span'
+                var nextSpan = input.nextElementSibling;
+
+                // Check if the next sibling is a 'span' element
+                if (nextSpan && nextSpan.tagName.toLowerCase() === 'span') {
+                    // Set the display style to 'inline' and fade out after 5000 milliseconds (5 seconds)
+                    nextSpan.style.display = 'inline';
+                    setTimeout(function () {
+                        nextSpan.style.opacity = '0';
+                        setTimeout(function () {
+                            nextSpan.style.display = 'none';
+                        }, 1000); // Fading out time is 1 second
+                    }, 5000); // Wait for 5 seconds before starting the fade-out
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>

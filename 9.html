@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>GeeksforGeeks</h1>
+
+    <h3>
+        How to get the Position of
+        mouse pointer in jQuery?
+    </h3>
+
+    <div id="GFG"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Add mousemove event listener to the document
+            document.addEventListener('mousemove', function (event) {
+                // Get the element with id "GFG" and update its text content
+                var element = document.getElementById('GFG');
+                if (element) {
+                    element.textContent = "Mouse Position (" + event.pageX + ", " + event.pageY + ")";
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
