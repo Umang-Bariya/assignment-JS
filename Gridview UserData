@@ -1,0 +1,92 @@
+<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowCommand="GridView1_RowCommand">
+    <Columns>
+        <asp:BoundField DataField="usertid" HeaderText="User ID" />
+        <asp:BoundField DataField="username" HeaderText="Username" />
+        <asp:BoundField DataField="firstname" HeaderText="First Name" />
+        <asp:BoundField DataField="lastname" HeaderText="Last Name" />
+        <asp:BoundField DataField="usertype" HeaderText="User Type" />
+        <asp:BoundField DataField="timezone" HeaderText="Timezone" />
+        <asp:BoundField DataField="country" HeaderText="Country" />
+        <asp:BoundField DataField="state" HeaderText="State" />
+        <asp:BoundField DataField="city" HeaderText="City" />
+        <asp:BoundField DataField="phone" HeaderText="Phone" />
+        <asp:BoundField DataField="email" HeaderText="Email" />
+        <asp:TemplateField HeaderText="Actions">
+            <ItemTemplate>
+                <asp:Button runat="server" Text="Update" CommandName="UpdateRow" CommandArgument='<%# Eval("usertid") %>' />
+                <asp:Button runat="server" Text="Hide" CommandName="HideRow" CommandArgument='<%# Eval("usertid") %>' />
+                <asp:Button runat="server" Text="Delete" CommandName="DeleteRow" CommandArgument='<%# Eval("usertid") %>' />
+            </ItemTemplate>
+        </asp:TemplateField>
+    </Columns>
+</asp:GridView>
+
+
+
+
+protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+{
+    int rowIndex = Convert.ToInt32(e.CommandArgument);
+    if (e.CommandName == "UpdateRow")
+    {
+        string userId = GridView1.DataKeys[rowIndex].Value.ToString();
+        Response.Redirect("updateform.aspx?userId=" + userId);
+    }
+    else if (e.CommandName == "HideRow")
+    {
+        GridView1.Rows[rowIndex].Visible = false;
+    }
+    else if (e.CommandName == "DeleteRow")
+    {
+        // Delete the record from the database using the userId and refresh GridView
+    }
+}
+
+
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#GridView1').DataTable();
+    });
+</script>
+
+
+
+<asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" OnRowCommand="GridView1_RowCommand">
+    <!-- Columns -->
+    <Columns>
+        <!-- Other columns -->
+        <asp:TemplateField HeaderText="Actions">
+            <ItemTemplate>
+                <asp:Button runat="server" Text="Update" CommandName="UpdateRow" CommandArgument='<%# Eval("usertid") %>' OnClientClick="return OpenUpdatePopup();" />
+                <!-- Other buttons -->
+            </ItemTemplate>
+        </asp:TemplateField>
+    </Columns>
+</asp:GridView>
+
+
+
+<script type="text/javascript">
+    function OpenUpdatePopup() {
+        var url = "updateform.aspx?userId=<%# Eval("usertid") %>";
+        var width = 600; // Width of the popup window
+        var height = 400; // Height of the popup window
+        var leftPosition = (screen.width / 2) - (width / 2); // Center the popup window horizontally
+        var topPosition = (screen.height / 2) - (height / 2); // Center the popup window vertically
+
+        // Open the popup window
+        window.open(url, "", "width=" + width + ",height=" + height + ",top=" + topPosition + ",left=" + leftPosition);
+
+        // Prevent the default behavior of the button click
+        return false;
+    }
+</script>
+
+
+
